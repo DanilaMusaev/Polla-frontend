@@ -1,9 +1,3 @@
-body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-        sans-serif;
-}
-
 :root {
     /* Colors Dark Theme */
 	--primary: #818cf8;
@@ -14,6 +8,9 @@ body {
 	--text-primary: #f1f5f9;
 	--text-secondary: #94a3b8;
 	--border: #334155;
+	
+	--blue-light: #84C9FF;
+	--yellow-light: #FFE33D;
 }
 
 html[data-theme="light"] {
@@ -26,4 +23,32 @@ html[data-theme="light"] {
 	--text-secondary: #64748b;
 	--text-primary: #1e293b;
 	--border: #e2e8f0;
+}
+
+:root {
+	--logo-fill-color: var(--text-primary);
+
+	/* Toggle Theme Button */
+	--toggle-theme-bgc: var(--surface);
+	--toggle-theme-circle: var(--text-primary);
+	--toggle-theme-moon-fill: var(--blue-light);
+	--toggle-theme-sun-fill: var(--yellow-light);
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+        sans-serif;
+	color: var(--text-primary);
+}
+
+.container {
+	width: 100%;
+	max-width: 1430px;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+
+.logo {
+
 }

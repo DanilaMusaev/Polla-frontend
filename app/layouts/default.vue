@@ -1,12 +1,14 @@
 <template>
-    <ClientOnly>
-        <UiStarsBackground class-name="stars__background" />
-    </ClientOnly>
+    <IconsSvgSprite />
     <div class="page__wrapper">
         <div class="page__content">
+            <LayoutHeader />
             <slot></slot>
         </div>
     </div>
+    <ClientOnly>
+        <UiStarsBackground class-name="stars__background" />
+    </ClientOnly>
 </template>
 
 
@@ -17,7 +19,7 @@
     position: relative;
     background-color: var(--background);
 
-    z-index: -1;
+    z-index: 0;
 }
 
 .page__content {
