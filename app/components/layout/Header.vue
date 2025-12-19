@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import {ROUTES} from '~/config/routes';
+
+const {theme, toggle} = useTheme();
+
+const isLightTheme = computed(() => theme.value === 'light');
 </script>
 
 <template>
@@ -10,7 +14,7 @@ import {ROUTES} from '~/config/routes';
                 <p class="header__logo-text">Polla</p>
             </NuxtLink>
             <div class="header__controls">
-                <SharedThemeToggle />
+                <SharedThemeToggle @click="toggle" :is-light-theme="isLightTheme"/>
                 <NuxtLink :to="ROUTES.gitRepo" class="header__git-link">
                     <IconsSvgIcon name="git" class="header__git-icon"/>
                 </NuxtLink>
@@ -47,6 +51,12 @@ import {ROUTES} from '~/config/routes';
     height: 50px;
     width: 50px;
     fill: var(--text-secondary);
+
+    transition: fill 0.2s ease-out;
+}
+
+.header__git-icon:hover {
+    fill: var(--text-primary);
 }
 
 .header__logo-text {

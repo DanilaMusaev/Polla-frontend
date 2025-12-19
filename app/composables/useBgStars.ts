@@ -114,7 +114,12 @@ class Star {
         return Math.random() * (max - min) + min;
     }
 }
-
+/**
+ * Composable to add the effect of stars on the background 
+ * 
+ * @param options - initial settings for the background of stars
+ * @returns 
+ */
 export const useBgStars = (options?: StarsParams) => {
     const config: StarsConfig = {
         ...defaultConfig,

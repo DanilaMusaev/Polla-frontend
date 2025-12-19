@@ -33,6 +33,10 @@ html[data-theme="light"] {
 	--toggle-theme-circle: var(--text-primary);
 	--toggle-theme-moon-fill: var(--blue-light);
 	--toggle-theme-sun-fill: var(--yellow-light);
+
+	/* Footer */
+	--footer-bg: rgb(from var(--surface) r g b / 25%);
+	
 }
 
 body {
@@ -51,4 +55,12 @@ body {
 
 .logo {
 
+}
+
+.accent-secondary {
+    color: var(--secondary);
+}
+
+.accent-primary {
+    color: var(--primary);
 }

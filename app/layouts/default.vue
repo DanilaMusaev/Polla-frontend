@@ -4,6 +4,7 @@
         <div class="page__content">
             <LayoutHeader />
             <slot></slot>
+            <LayoutFooter />
         </div>
     </div>
     <ClientOnly>

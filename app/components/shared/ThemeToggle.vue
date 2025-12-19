@@ -1,14 +1,38 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface Props {
+    isLightTheme: boolean;
+}
+interface Emits {
+    (e: 'click'): void;
+}
+
+const isMounted = ref<boolean>(false);
+const props = defineProps<Props>();
+const emits = defineEmits<Emits>();
+
+const handleClick = () => {
+    emits('click');
+};
+
+onMounted(() => {
+    isMounted.value = true;
+});
+</script>
 
 <template>
-    <button type="button" class="themeToggle__wrapper">
+    <button
+        type="button"
+        class="themeToggle"
+        @click="handleClick"
+        :class="{ light: isMounted && props.isLightTheme }"
+    >
         <IconsSvgIcon name="sunTheme" class="icon-sun" />
         <IconsSvgIcon name="moonTheme" class="icon-moon" />
     </button>
 </template>
 
 <style scoped>
-.themeToggle__wrapper {
+.themeToggle {
     position: relative;
     max-width: 100px;
     padding: 8px;
@@ -20,7 +44,7 @@
     background-color: var(--toggle-theme-bgc);
 }
 
-.themeToggle__wrapper::before {
+.themeToggle::before {
     content: '';
     position: absolute;
     top: 5px;
@@ -30,8 +54,12 @@
     height: 40px;
     border-radius: 50%;
     background-color: var(--toggle-theme-circle);
-    
+
     transition: all 0.2s ease-out;
+}
+
+.themeToggle.light::before {
+    left: calc(100% - 5px - 40px);
 }
 
 .icon-sun,
