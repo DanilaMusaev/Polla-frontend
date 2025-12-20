@@ -10,6 +10,9 @@ export default defineNuxtConfig({
         },
     },
     devtools: { enabled: true },
+    imports: {
+        dirs: ['~/shared/types/**'],
+    },
     css: ['~/assets/css/reset.css', '~/assets/css/global.css'],
     modules: ['@nuxt/image'],
 });

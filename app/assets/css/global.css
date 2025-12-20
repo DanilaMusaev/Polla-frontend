@@ -26,6 +26,7 @@ html[data-theme="light"] {
 }
 
 :root {
+	/* Header */
 	--logo-fill-color: var(--text-primary);
 
 	/* Toggle Theme Button */
@@ -36,7 +37,16 @@ html[data-theme="light"] {
 
 	/* Footer */
 	--footer-bg: rgb(from var(--surface) r g b / 25%);
-	
+
+	/* Home Page */
+	--selector-card-bg: rgb(from var(--surface) r g b / 25%);
+	--selector-card-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.3);
+	--selector-card-shadow-hover: 4px 4px 20px 0 rgba(255, 255, 255, 0.25);
+	--selector-card-outline-hover: var(--blue-light);
+
+	/* Icons */
+	--icon-fill-primary: var(--primary);
+	--icon-fill-secondary: var(--secondary);
 }
 
 body {
@@ -44,6 +54,7 @@ body {
         Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
         sans-serif;
 	color: var(--text-primary);
+	background-color: var(--background);
 }
 
 .container {

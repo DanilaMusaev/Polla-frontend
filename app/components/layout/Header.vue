@@ -42,14 +42,14 @@ const isLightTheme = computed(() => theme.value === 'light');
 }
 
 .header__logo-icon {
-    width: 54px;
-    height: 54px;
+    width: 45px;
+    height: 45px;
     fill: var(--logo-fill-color);
 }
 
 .header__git-icon {
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 35px;
     fill: var(--text-secondary);
 
     transition: fill 0.2s ease-out;
@@ -61,7 +61,7 @@ const isLightTheme = computed(() => theme.value === 'light');
 
 .header__logo-text {
     font-weight: 600;
-    font-size: 45px;
+    font-size: 35px;
     color: var(--text-primary);
 }
 

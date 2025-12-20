@@ -3,7 +3,9 @@
     <div class="page__wrapper">
         <div class="page__content">
             <LayoutHeader />
-            <slot></slot>
+            <div class="page__slot-content">
+                <slot></slot>
+            </div>
             <LayoutFooter />
         </div>
     </div>
@@ -18,8 +20,6 @@
     min-height: 100vh;
 
     position: relative;
-    background-color: var(--background);
-
     z-index: 0;
 }
 
@@ -34,13 +34,20 @@
     z-index: 1;
 }
 
+.page__slot-content {
+    flex-grow: 1;
+    
+    display: flex;
+    flex-direction: column;
+}
+
 .stars__background {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 0;
+    z-index: -1;
 
     pointer-events: none;
 }

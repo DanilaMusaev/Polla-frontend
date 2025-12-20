@@ -34,11 +34,11 @@ onMounted(() => {
 <style scoped>
 .themeToggle {
     position: relative;
-    max-width: 100px;
-    padding: 8px;
+    max-width: 70px;
+    padding: 7px;
     display: flex;
     align-items: center;
-    column-gap: 14px;
+    column-gap: 6px;
 
     border-radius: 25px;
     background-color: var(--toggle-theme-bgc);
@@ -47,11 +47,11 @@ onMounted(() => {
 .themeToggle::before {
     content: '';
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 6px;
+    left: 6px;
 
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background-color: var(--toggle-theme-circle);
 
@@ -59,13 +59,13 @@ onMounted(() => {
 }
 
 .themeToggle.light::before {
-    left: calc(100% - 5px - 40px);
+    left: calc(100% - 6px - 28px);
 }
 
 .icon-sun,
 .icon-moon {
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
 }
 
 .icon-sun {
