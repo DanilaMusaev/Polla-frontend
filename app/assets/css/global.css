@@ -10,6 +10,7 @@
 	--border: #334155;
 	
 	--blue-light: #84C9FF;
+	--blue-dark: #0f1522;
 	--yellow-light: #FFE33D;
 }
 
@@ -44,6 +45,15 @@ html[data-theme="light"] {
 	--selector-card-shadow-hover: 4px 4px 20px 0 rgba(255, 255, 255, 0.25);
 	--selector-card-outline-hover: var(--blue-light);
 
+	/* Modals */
+	--modal-overlay-bg: rgb(from var(--blue-dark) r g b / 80%);
+	--modal-content-bg: rgb(from var(--surface) r g b / 100%);
+	--modal-title-bg: var(--background);
+	--modal-close-icon: var(--secondary);
+	--modal-input-bg-dark: var(--background);
+	--modal-button-bg-secondary: var(--secondary);
+	--modal-button-text: var(--background);
+
 	/* Icons */
 	--icon-fill-primary: var(--primary);
 	--icon-fill-secondary: var(--secondary);
@@ -64,9 +74,9 @@ body {
 	margin: 0 auto;
 }
 
-.logo {
+/* .logo {
 
-}
+} */
 
 .accent-secondary {
     color: var(--secondary);
