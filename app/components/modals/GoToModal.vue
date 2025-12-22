@@ -3,8 +3,13 @@ interface ModalProps {
     isShowModal?: boolean;
     action: 'complete' | 'check';
 }
+interface ModalEmits {
+    (e: 'close'): void;
+    (e: 'submit', action: 'complete' | 'check', id: string): void;
+}
 
 const props = defineProps<ModalProps>();
+const emit = defineEmits<ModalEmits>();
 
 const pollId = ref<string>('');
 
@@ -18,6 +23,8 @@ const modalText = computed(() => {
 const isIdWritten = computed(() => !pollId.value.trim());
 
 const buttonHandler = () => {
+    emit('submit', props.action, pollId.value);
+
     switch (props.action) {
         case 'check':
             alert(`Check id: ${pollId.value}`);
@@ -26,11 +33,17 @@ const buttonHandler = () => {
             alert(`Complete id: ${pollId.value}`);
             break;
     }
+
+    pollId.value = '';
+}
+
+const modalClose = () => {
+    emit('close');
 }
 </script>
 
 <template>
-    <ModalsModalOverlay :modal-title="modalTitle" :is-show-modal="props.isShowModal">
+    <ModalsModalOverlay @close="modalClose" :modal-title="modalTitle" :is-show-modal="props.isShowModal">
         <div class="modal-goto__wrapper">
             <p class="modal-goto__text">{{ modalText }}</p>
             <div class="modal__input-wrapper">

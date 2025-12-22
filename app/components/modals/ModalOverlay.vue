@@ -7,13 +7,18 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const emit = defineEmits(['close']);
+
+const modalClose = () => {
+    emit('close');
+}
 </script>
 
 <template>
-    <div class="modal__overlay" :class="{hide: !props.isShowModal}">
-        <div class="modal__content">
+    <div class="modal__overlay" :class="{hide: !props.isShowModal}" @click="modalClose">
+        <div class="modal__content" @click.stop>
             <h3 class="modal__title">{{ props.modalTitle }}</h3>
-            <button type="button" class="modal-close__btn">
+            <button @click="modalClose" type="button" class="modal-close__btn">
                 <SvgIcon name="close" class="modal-close-icon" />
             </button>
             <slot></slot>

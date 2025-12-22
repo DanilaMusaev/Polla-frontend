@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const showGoToModal = ref<boolean>(false);
+import { useGoToModal } from '~/composables/useGoToModal';
+
+const { isOpen, action: gotoAction, openModal, closeModal } = useGoToModal();
 
 const HOME_SELECTORS: HomeSelectorsProps[] = [
     {
@@ -7,14 +9,14 @@ const HOME_SELECTORS: HomeSelectorsProps[] = [
         iconFill: 'primary',
         title: 'Complete the poll',
         text: 'If you have a poll identificator, you can complete it.',
-        handler: () => showGoToModal.value = !showGoToModal.value,
+        handler: () => openModal('complete'),
     },
     {
         icon: 'statistics',
         iconFill: 'secondary',
         title: 'Check the poll results',
         text: 'If you have a verification identificator for the poll results, you can check which answers the users gave.',
-        handler: () => showGoToModal.value = !showGoToModal.value,
+        handler: () => openModal('check'),
     },
     {
         icon: 'feather',
@@ -30,7 +32,12 @@ const HOME_SELECTORS: HomeSelectorsProps[] = [
     <div class="home">
         <DomainHomeSelectorsGrid :selectors-list="HOME_SELECTORS" />
     </div>
-    <ModalsGoToModal :is-show-modal="showGoToModal" action="check" />
+    <ModalsGoToModal
+        v-if="gotoAction"
+        :is-show-modal="isOpen"
+        :action="gotoAction"
+        @close="closeModal"
+    />
 </template>
 
 <style scoped>
