@@ -27,6 +27,19 @@ html[data-theme="light"] {
 }
 
 :root {
+	/* Other */
+	--blue-dark-alf-80: rgb(from var(--blue-dark) r g b / 80%);
+
+	--background-alf-10: rgb(from var(--background) r g b / 10%);
+	--background-alf-25: rgb(from var(--background) r g b / 25%);
+	--background-alf-50: rgb(from var(--background) r g b / 50%);
+	--background-alf-75: rgb(from var(--background) r g b / 75%);
+
+	--surface-alf-10: rgb(from var(--surface) r g b / 10%);
+	--surface-alf-25: rgb(from var(--surface) r g b / 25%);
+	--surface-alf-50: rgb(from var(--surface) r g b / 50%);
+	--surface-alf-75: rgb(from var(--surface) r g b / 75%);
+
 	/* Header */
 	--logo-fill-color: var(--text-primary);
 
@@ -37,17 +50,20 @@ html[data-theme="light"] {
 	--toggle-theme-sun-fill: var(--yellow-light);
 
 	/* Footer */
-	--footer-bg: rgb(from var(--surface) r g b / 25%);
+	--footer-bg: var(--surface-alf-25);
 
 	/* Home Page */
-	--selector-card-bg: rgb(from var(--surface) r g b / 25%);
+	--selector-card-bg: var(--surface-alf-25);
 	--selector-card-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.3);
 	--selector-card-shadow-hover: 4px 4px 20px 0 rgba(255, 255, 255, 0.25);
 	--selector-card-outline-hover: var(--blue-light);
 
+	/* Create Page */
+	--content-wrapper-bg: var(--surface-alf-50);
+
 	/* Modals */
-	--modal-overlay-bg: rgb(from var(--blue-dark) r g b / 80%);
-	--modal-content-bg: rgb(from var(--surface) r g b / 100%);
+	--modal-overlay-bg: var(--blue-dark-alf-80);
+	--modal-content-bg: var(--surface);
 	--modal-title-bg: var(--background);
 	--modal-close-icon: var(--secondary);
 	--modal-input-bg-dark: var(--background);
@@ -67,6 +83,8 @@ body {
 	background-color: var(--background);
 }
 
+/* Global Style Classes */
+
 .container {
 	width: 100%;
 	max-width: 1430px;
@@ -77,6 +95,28 @@ body {
 /* .logo {
 
 } */
+
+.title-1 {
+	font-weight: 600;
+	font-size: 30px;
+	text-transform: uppercase;
+	text-align: center;
+	color: var(--text-primary);
+}
+
+.block-title {
+	padding: 6px 40px;
+    margin: 0px auto 10px auto;
+    width: fit-content;
+
+    font-weight: 400;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+
+    border-radius: 30px;
+    background-color: var(--modal-title-bg);
+}
 
 .accent-secondary {
     color: var(--secondary);
