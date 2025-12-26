@@ -14,7 +14,7 @@
 
 <style scoped>
 .footer {
-    padding: 32px 0px 60px;
+    padding: 22px 0px 40px;
     background-color: var(--footer-bg);
 }
 
@@ -26,7 +26,7 @@
 .footer__info {
     font-family: var(--font-family);
     font-weight: 600;
-    font-size: 18px;
+    font-size: 14px;
     text-align: center;
     color: var(--text-secondary);
 }

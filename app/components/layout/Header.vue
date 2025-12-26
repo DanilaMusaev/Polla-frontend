@@ -26,7 +26,7 @@ const isLightTheme = computed(() => theme.value === 'light');
 <style scoped>
 .header {
     padding: 0 200px;
-    padding-top: 40px;
+    padding-top: 20px;
 }
 
 .header__inner {
@@ -42,8 +42,8 @@ const isLightTheme = computed(() => theme.value === 'light');
 }
 
 .header__logo-icon {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     fill: var(--logo-fill-color);
 }
 
@@ -61,7 +61,7 @@ const isLightTheme = computed(() => theme.value === 'light');
 
 .header__logo-text {
     font-weight: 600;
-    font-size: 35px;
+    font-size: 30px;
     color: var(--text-primary);
 }
 

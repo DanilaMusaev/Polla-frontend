@@ -19,10 +19,10 @@ html[data-theme="light"] {
 	--primary: #6366f1;
 	--primary-hover: #4f46e5;
 	--secondary: #10b981;
-	--background: #f8fafc;
-	--surface: #fff;
-	--text-secondary: #64748b;
-	--text-primary: #1e293b;
+	--background: #f1f5f9;
+	--surface: #ffffff;
+	--text-secondary: #475569;
+	--text-primary: #0f172a;
 	--border: #e2e8f0;
 }
 
@@ -61,6 +61,11 @@ html[data-theme="light"] {
 	/* Create Page */
 	--content-wrapper-bg: var(--surface-alf-50);
 
+	--question-item-bg: var(--background);
+	--question-item-order-text: var(--background);
+	--question-item-order-bg: var(--text-primary);
+	--question-item-delete-icon: var(--text-primary);
+
 	/* Modals */
 	--modal-overlay-bg: var(--blue-dark-alf-80);
 	--modal-content-bg: var(--surface);
@@ -98,7 +103,7 @@ body {
 
 .title-1 {
 	font-weight: 600;
-	font-size: 30px;
+	font-size: 25px;
 	text-transform: uppercase;
 	text-align: center;
 	color: var(--text-primary);
@@ -106,16 +111,16 @@ body {
 
 .block-title {
 	padding: 6px 40px;
-    margin: 0px auto 10px auto;
+    margin: 0 auto;
     width: fit-content;
 
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
     text-transform: uppercase;
     color: var(--text-primary);
 
     border-radius: 30px;
-    background-color: var(--modal-title-bg);
+    background-color: var(--surface);
 }
 
 .accent-secondary {
