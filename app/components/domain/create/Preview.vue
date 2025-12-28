@@ -18,7 +18,7 @@
     padding: 10px 20px;
     
     border-radius: 10px;
-    background-color: var(--surface);
+    background-color: var(--surface-alf-50);
 }
 
 .preview__title {
@@ -29,7 +29,7 @@
     padding: 10px;
 
     border-radius: 8px;
-    fill: var(--surface);
+    background-color: var(--surface);
 }
 
 .preview__name {

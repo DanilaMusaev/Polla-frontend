@@ -9,7 +9,8 @@ const props = defineProps<Props>();
 <template>
     <div class="selectors__grid">
         <DomainHomeServiceSelector
-            v-for="selector in props.selectorsList"
+            v-for="(selector, index) in props.selectorsList"
+            :key="`${selector.title}_${index}`"
             :icon="selector.icon"
             :icon-fill="selector.iconFill"
             :title="selector.title"

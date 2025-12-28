@@ -6,10 +6,10 @@ const props = defineProps<HomeSelectorsProps>();
 const iconFillStyle = computed(() => {
     if (props.iconFill) {
         return props.iconFill === 'primary'
-            ? 'var(--icon-fill-primary);'
-            : 'var(--icon-fill-secondary);';
+            ? 'var(--icon-fill-primary)'
+            : 'var(--icon-fill-secondary)';
     } else {
-        return 'var(--icon-fill-primary);';
+        return 'var(--icon-fill-primary)';
     }
 });
 </script>

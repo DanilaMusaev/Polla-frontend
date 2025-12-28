@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useGoToModal } from '~/composables/useGoToModal';
+import { ROUTES } from '~/config/routes';
 
 const { isOpen, action: gotoAction, openModal, closeModal } = useGoToModal();
 
@@ -23,7 +24,7 @@ const HOME_SELECTORS: HomeSelectorsProps[] = [
         iconFill: 'primary',
         title: 'Create a new poll',
         text: 'Create a new poll that you can share with other people to complete it!',
-        handler: () => alert('In development'),
+        handler: () => navigateTo(ROUTES.createPoll),
     },
 ];
 </script>
