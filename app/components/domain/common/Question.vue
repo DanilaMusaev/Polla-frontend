@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { QuestionFromApi } from '~/api/types/poll.api-type';
 import Text from './questions-types/Text.vue';
+import SingleChoice from './questions-types/SingleChoice.vue';
 
 interface Props {
-    question: QuestionFromApi;
+    question: Omit<QuestionFromApi, 'pollId'>;
     modelValue?: any;
 }
 interface Emits {
@@ -16,7 +17,7 @@ const emit = defineEmits<Emits>();
 
 const componentMap = {
     TEXT: Text,
-    SINGLE_CHOICE: Text,
+    SINGLE_CHOICE: SingleChoice,
     MULTIPLE_CHOICE: Text,
     IMAGE_CHOICE: Text,
     RATING: Text,

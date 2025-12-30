@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-    <div class="create-poll">
+    <div class="create-poll main-content">
         <LayoutContainer>
             <h2 class="title-1 create-poll__title">Creating a poll</h2>
             <main class="create-poll__main-frames">

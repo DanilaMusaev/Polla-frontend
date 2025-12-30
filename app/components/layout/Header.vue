@@ -25,8 +25,7 @@ const isLightTheme = computed(() => theme.value === 'light');
 
 <style scoped>
 .header {
-    padding: 0 200px;
-    padding-top: 20px;
+    padding: 15px 200px 8px;
 }
 
 .header__inner {

@@ -2,7 +2,7 @@
 import type { QuestionFromApi } from '~/api/types/poll.api-type';
 
 interface Props {
-    question: QuestionFromApi,
+    question: Omit<QuestionFromApi, 'pollId'>,
     modelValue?: string;
 }
 interface Emits {
@@ -27,7 +27,8 @@ const handleInput = (event: Event) => {
 <style scoped>
 .question-text__textarea {
     padding: 8px 10px;
-    height: 40px;
+    height: 38px;
+    width: 100%;
 
     font-weight: 400;
     font-size: 16px;

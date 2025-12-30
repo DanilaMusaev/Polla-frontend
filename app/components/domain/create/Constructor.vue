@@ -33,6 +33,7 @@
 
 <style scoped>
 .constructor {
+    flex-grow: 4;
     padding: 10px 20px;
 
     border-radius: 10px;

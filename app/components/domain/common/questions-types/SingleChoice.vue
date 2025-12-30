@@ -2,7 +2,7 @@
 import type { QuestionFromApi } from '~/api/types/poll.api-type';
 
 interface Props {
-    question: QuestionFromApi;
+    question: Omit<QuestionFromApi, 'pollId'>;
     modelValue?: string | number;
 }
 interface Emits {
@@ -19,26 +19,43 @@ const handleChange = (value: string | number) => {
 
 <template>
     <div class="question-single-choice">
-        <label
-            v-for="choice in props.question.options"
-            :key="choice.value"
+        <UiQuestionBaseBorderChoice
+            v-for="choice, index in props.question.options"
+            :key="`${index}__${choice}`"
+            :is-selected="modelValue === choice"
             class="choice-label"
+            flex
+            center
         >
             <input
                 type="radio"
                 :name="props.question.id"
                 :value="choice"
                 :checked="modelValue === choice"
-                @change="handleChange(choice.value)"
+                @change="handleChange(choice)"
                 class="choice-input"
             />
             <div class="choice-content">
                 <span class="choice-label-text">{{ choice }}</span>
             </div>
-        </label>
+        </UiQuestionBaseBorderChoice>
     </div>
 </template>
 
 <style scoped>
-    
+.question-single-choice{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px 6px;
+}
+
+.choice-input {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.choice-content {
+    padding: 6px 15px;
+}
 </style>

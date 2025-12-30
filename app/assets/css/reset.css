@@ -74,6 +74,8 @@ input[type='submit'] {
 }
 input:focus,
 input:active,
+textarea:active,
+textarea:focus,
 button:focus,
 button:active {
     outline: none;
