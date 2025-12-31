@@ -2,6 +2,8 @@
 import type { QuestionFromApi } from '~/api/types/poll.api-type';
 import Text from './questions-types/Text.vue';
 import SingleChoice from './questions-types/SingleChoice.vue';
+import MultipleChoice from './questions-types/MultipleChoice.vue';
+import ImageChoice from './questions-types/ImageChoice.vue';
 
 interface Props {
     question: Omit<QuestionFromApi, 'pollId'>;
@@ -18,8 +20,8 @@ const emit = defineEmits<Emits>();
 const componentMap = {
     TEXT: Text,
     SINGLE_CHOICE: SingleChoice,
-    MULTIPLE_CHOICE: Text,
-    IMAGE_CHOICE: Text,
+    MULTIPLE_CHOICE: MultipleChoice,
+    IMAGE_CHOICE: ImageChoice,
     RATING: Text,
 } as const;
 

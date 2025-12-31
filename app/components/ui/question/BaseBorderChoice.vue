@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-    isSelected: boolean;
+    isSelected?: boolean;
     flex?: boolean;
     column?: boolean;
     center?: boolean;
