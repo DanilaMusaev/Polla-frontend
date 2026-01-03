@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const {isOpen, open, close} = useModal();
 </script>
 
 <template>
@@ -22,12 +23,13 @@
                 <DomainCreateQuestionItem :order="1" text="What is your favorite color?" type="TEXT" />
                 <DomainCreateQuestionItem :order="2" text="What the fuck are you?" type="IMAGE_CHOICE" />
             </ul>
-            <UiMyButton class="constructor__questions-add-btn" icon="plus" :icon-with-round="true">Add a question</UiMyButton>
+            <UiMyButton class="constructor__questions-add-btn" icon="plus" :icon-with-round="true" @click="open">Add a question</UiMyButton>
         </div>
         <div class="constructor__control-btns">
             <UiMyButton btn-type="bordered" icon="add-file">Create Poll</UiMyButton>
             <UiMyButton btn-type="bordered" icon="draft">Save draft</UiMyButton>
         </div>
+    <ModalsCreateQuestionModal v-if="isOpen" :is-show-modal="isOpen" @close="close" />
     </div>
 </template>
 

@@ -69,7 +69,7 @@ const props = defineProps<Props>();
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.question-elem__border.selected .question-elem__check-mark {
+.question-elem__border.selected > .question-elem__check-mark {
     opacity: 1;
     transform: scale(1);
 }
