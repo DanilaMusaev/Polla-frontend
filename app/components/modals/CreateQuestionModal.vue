@@ -129,6 +129,20 @@ watch(
                     </div>
                 </div>
             </Transition>
+
+            <Transition name="slide">
+                <div
+                    v-if="currentStep === 3"
+                    class="modal-create-question__slide"
+                >
+                    <h3 class="modal-create-question__curr-action">
+                        {{ stepTitle[3] }}
+                    </h3>
+                    <div class="modal-create-question__content">
+                        <DomainCommonQuestionAnswersOptions :type="questionInfo.type" />
+                    </div>
+                </div>
+            </Transition>
         </div>
         <div class="modal-create-question__controls">
             <button @click="prevStep" :disabled="isPrevDisabled" class="modal-create-question__control-btn" type="button">
@@ -148,10 +162,6 @@ watch(
 </template>
 
 <style scoped>
-.modal-create-question__wrapper {
-    padding: 10px;
-}
-
 .modal-create-question__slides-container {
     min-width: 550px;
     min-height: 500px;
@@ -168,7 +178,6 @@ watch(
   animation-fill-mode: both;
 }
 
-/* Анимация слайдов */
 .slide-enter-active {
   animation: slideInRight 0.3s;
 }
@@ -215,6 +224,10 @@ watch(
     transition: all 0.3s ease-out;
 }
 
+.modal-create-question__content {
+    padding: 5px;
+}
+
 .modal-create-question__controls {
     display: flex;
     justify-content: space-between;
@@ -237,6 +250,6 @@ watch(
 }
 
 .icon-forward {
-    transform: rotate(180deg);
+    transform: rotateY(180deg);
 }
 </style>

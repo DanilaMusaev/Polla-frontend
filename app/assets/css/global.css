@@ -74,6 +74,7 @@ html[data-theme="light"] {
 	--modal-input-bg-dark: var(--background);
 	--modal-button-bg-secondary: var(--secondary);
 	--modal-button-text: var(--background);
+	--modal-button-bg: var(--background);
 
 	/* Icons */
 	--icon-fill-primary: var(--primary);
@@ -133,4 +134,23 @@ body {
 
 .accent-primary {
     color: var(--primary);
+}
+
+/* Общие анимации */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+  20%, 40%, 60%, 80% { transform: translateX(3px); }
+}
+
+@keyframes shake-rotation {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+@keyframes shake-rotation-alt {
+  0%, 100% { transform: rotate(0deg); }
+  33% { transform: rotate(-4deg); }
+  66% { transform: rotate(4deg); }
 }

@@ -90,8 +90,8 @@ const questionType = computed(() => {
 }
 
 .question-item__icon-delete {
-    width: 15px;
-    height: 15px;
+    width: 17px;
+    height: 17px;
     stroke: var(--question-item-delete-icon);
     fill: transparent;
     stroke-width: 8px;

@@ -2,6 +2,7 @@
 interface Props {
     btnType?: 'solid' | 'bordered';
     icon?: string;
+    iconColor?: string;
     iconPosition?: 'start' | 'end';
     iconWithRound?: boolean;
 }

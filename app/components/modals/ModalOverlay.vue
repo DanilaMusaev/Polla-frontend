@@ -48,7 +48,7 @@ const modalClose = () => {
 
 .modal__content {
     position: relative;
-    padding: 10px 15px 30px;
+    padding: 10px 25px 25px;
     border-radius: 6%;
     background-color: var(--modal-content-bg);
 }
@@ -71,6 +71,10 @@ const modalClose = () => {
     position: absolute;
     right: 10px;
     top: 20px;
+}
+
+.modal-close__btn:hover {
+    animation: shake-rotation-alt 0.25s ease-in-out;
 }
 
 .modal-close-icon {
