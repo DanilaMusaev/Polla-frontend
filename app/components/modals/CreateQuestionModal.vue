@@ -20,7 +20,7 @@ const stepValidations = {
     2: computed(() => questionInfo.type !== undefined),
     3: computed(() => {
         if (questionInfo.type !== 'TEXT') {
-            return questionInfo.options?.length > 0;
+            return questionInfo.options?.length >= 2;
         }
         return true;
     }),
@@ -66,7 +66,9 @@ const handleChangeQuestionProperty = (
 };
 
 const isPrevDisabled = computed(() => currentStep.value === 1);
-const isNextDisabled = computed(() => !stepValidations[currentStep.value].value);
+const isNextDisabled = computed(
+    () => !stepValidations[currentStep.value].value
+);
 
 watch(
     () => questionInfo.type,
@@ -74,9 +76,7 @@ watch(
         if (newType === 'TEXT') {
             questionInfo.options = undefined;
         } else if (
-            (newType === 'SINGLE_CHOICE' ||
-                newType === 'MULTIPLE_CHOICE' ||
-                newType === 'IMAGE_CHOICE') &&
+            (newType === 'SINGLE_CHOICE' || newType === 'MULTIPLE_CHOICE') &&
             (!questionInfo.options || questionInfo.options.length === 0)
         ) {
             questionInfo.options = ['', ''];
@@ -123,7 +123,8 @@ watch(
                         <DomainCommonQuestionTypesChoice
                             :model-value="questionInfo.type"
                             @update:model-value="
-                                (value) => handleChangeQuestionProperty(value, 'type')
+                                (value) =>
+                                    handleChangeQuestionProperty(value, 'type')
                             "
                         />
                     </div>
@@ -139,19 +140,33 @@ watch(
                         {{ stepTitle[3] }}
                     </h3>
                     <div class="modal-create-question__content">
-                        <DomainCommonQuestionAnswersOptions :type="questionInfo.type" />
+                        <DomainCommonQuestionAnswersOptions
+                            :type="questionInfo.type"
+                            :model-value="questionInfo.options"
+                            @update:model-value="(value) => handleChangeQuestionProperty(value, 'options')"
+                        />
                     </div>
                 </div>
             </Transition>
         </div>
         <div class="modal-create-question__controls">
-            <button @click="prevStep" :disabled="isPrevDisabled" class="modal-create-question__control-btn" type="button">
+            <button
+                @click="prevStep"
+                :disabled="isPrevDisabled"
+                class="modal-create-question__control-btn"
+                type="button"
+            >
                 <IconsSvgIcon
                     name="back"
                     class="modal-create-question__control-icon icon-back"
                 />
             </button>
-            <button @click="nextStep" :disabled="isNextDisabled" class="modal-create-question__control-btn" type="button">
+            <button
+                @click="nextStep"
+                :disabled="isNextDisabled"
+                class="modal-create-question__control-btn"
+                type="button"
+            >
                 <IconsSvgIcon
                     name="back"
                     class="modal-create-question__control-icon icon-forward"
@@ -170,42 +185,42 @@ watch(
 }
 
 .modal-create-question__slide {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  animation-duration: 0.3s;
-  animation-fill-mode: both;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
 }
 
 .slide-enter-active {
-  animation: slideInRight 0.3s;
+    animation: slideInRight 0.3s;
 }
 
 .slide-leave-active {
-  animation: slideOutLeft 0.3s;
+    animation: slideOutLeft 0.3s;
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideOutLeft {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
 }
 
 .modal-create-question__curr-action {

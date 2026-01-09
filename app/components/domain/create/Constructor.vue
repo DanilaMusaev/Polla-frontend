@@ -29,7 +29,7 @@ const {isOpen, open, close} = useModal();
             <UiMyButton btn-type="bordered" icon="add-file">Create Poll</UiMyButton>
             <UiMyButton btn-type="bordered" icon="draft">Save draft</UiMyButton>
         </div>
-    <ModalsCreateQuestionModal v-if="isOpen" :is-show-modal="isOpen" @close="close" />
+    <ModalsCreateQuestionModal v-if="isOpen" :is-show-modal="isOpen" @close="close" @create="(question) => console.log(question)" />
     </div>
 </template>
 

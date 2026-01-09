@@ -49,7 +49,7 @@ const modalClose = () => {
 .modal__content {
     position: relative;
     padding: 10px 25px 25px;
-    border-radius: 6%;
+    border-radius: 20px;
     background-color: var(--modal-content-bg);
 }
 
@@ -69,7 +69,7 @@ const modalClose = () => {
 
 .modal-close__btn {
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 20px;
 }
 
