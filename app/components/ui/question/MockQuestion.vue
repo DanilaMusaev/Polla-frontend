@@ -6,6 +6,8 @@ import Text from './mock/Text.vue';
 
 interface Props {
     type: QuestionTypes;
+    text?: string;
+    options?: any;
 }
 
 const props = defineProps<Props>();
@@ -17,16 +19,19 @@ const componentMap = {
     IMAGE_CHOICE: ImageChoice,
     RATING: Text,
 } as const;
+
+const questionText = computed(() => props.text ? props.text : 'Question?');
 </script>
 
 <template>
     <div class="mock-question">
         <div class="question__header">
-            <h4 class="mock-question__text">Question?</h4>
+            <h4 class="mock-question__text">{{ questionText }}</h4>
         </div>
         <div class="question__content">
             <component
                 :is="componentMap[type]"
+                :options="props.options"
             />
         </div>
     </div>

@@ -1,63 +1,20 @@
 <script setup lang="ts">
-import type { QuestionFromApi } from '~/api/types/poll.api-type';
-
-const QUESTIONS_TEST: Omit<QuestionFromApi, 'pollId'>[] = [
-    {
-        id: '1314sdaf234',
-        type: 'TEXT',
-        text: 'What is your favorite color?',
-        order: 1,
-    },
-    {
-        id: '124141',
-        type: 'SINGLE_CHOICE',
-        text: 'What is your favorite color?',
-        order: 2,
-        options: ['green', 'yellow', 'red', 'blue'],
-    },
-    {
-        id: '879568765',
-        type: 'MULTIPLE_CHOICE',
-        text: 'What is your favorite chad?',
-        order: 3,
-        options: ['giga-', 'omega-', 'ultra-', 'sigma-'],
-    },
-    {
-        id: '21879huasjh24',
-        type: 'IMAGE_CHOICE',
-        text: 'Who are you?',
-        order: 4,
-        options: [
-            '/uploads/suchka.png',
-            '/uploads/glotter.png',
-            '/uploads/mashina.png',
-            '/uploads/lox.png',
-        ],
-    },
-];
-// Test var
-const answers = reactive<Record<string, any>>({});
-
-const handleAnswerChange = (value: any, questionId: string) => {
-    answers[questionId] = value;
-};
+const { poll } = usePollState();
 </script>
 
 <template>
     <div class="preview">
         <h3 class="preview__title block-title">Preview</h3>
         <div class="preview__name-desc-wrapper">
-            <p class="preview__name">Poll name</p>
-            <p class="preview__desc">Some description about this poll...</p>
+            <p class="preview__name">{{ poll.title }}</p>
+            <p v-if="poll.description" class="preview__desc">{{ poll.description }}</p>
         </div>
         <div class="preview__questions-list">
-            <DomainCommonQuestion
-                v-for="question in QUESTIONS_TEST"
-                :question="question"
-                v-model:model-value="answers[question.id]"
-                @update:model-value="
-                    (value) => handleAnswerChange(value, question.id)
-                "
+            <UiQuestionMockQuestion
+                v-for="question in poll.questions"
+                :text="question.text"
+                :type="question.type"
+                :options="question.options"
             />
         </div>
     </div>

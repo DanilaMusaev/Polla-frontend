@@ -1,4 +1,10 @@
 <script setup lang="ts">
+interface Props {
+    options?: any;
+}
+
+const props = defineProps<Props>();
+
 const modelValue = ref();
 
 const mockChoices = [
@@ -10,12 +16,14 @@ const mockChoices = [
 const handleChange = (value: string | number) => {
     modelValue.value = value;
 };
+
+const usedChoices = computed(() => props.options ? props.options : mockChoices);
 </script>
 
 <template>
     <div class="question-image-choice">
         <UiQuestionBaseBorderChoice
-            v-for="choice, index in mockChoices"
+            v-for="choice, index in usedChoices"
             :key="`${index}__${choice}`"
             :is-selected="modelValue === choice"
             class="choice-label"

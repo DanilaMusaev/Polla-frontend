@@ -1,4 +1,9 @@
 <script setup lang="ts">
+interface Props {
+    options?: any;
+}
+
+const props = defineProps<Props>();
 </script>
 
 <template>

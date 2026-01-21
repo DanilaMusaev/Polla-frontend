@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const {isOpen, open, close} = useModal();
+const {poll, addQuestion, updatePoll} = usePollState();
 </script>
 
 <template>
@@ -9,19 +10,18 @@ const {isOpen, open, close} = useModal();
             <p class="constructor__input-property-name">
                 Poll name
             </p>
-            <UiMyInput type="text" placeholder="Write the name here..." custom-class="constructor__input-elem"/>
+            <UiMyInput :model-value="poll.title" @update:model-value="(value) => updatePoll({title: value.toString()})" type="text" placeholder="Write the name here..." custom-class="constructor__input-elem"/>
         </div>
         <div class="constructor__input-property">
             <p class="constructor__input-property-name">
                 Poll description
             </p>
-            <UiMyInput type="text" placeholder="Write the description here..." custom-class="constructor__input-elem"/>
+            <UiMyInput :model-value="poll.description" @update:model-value="(value) => updatePoll({description: value.toString()})" type="text" placeholder="Write the description here..." custom-class="constructor__input-elem"/>
         </div>
         <div class="constructor__questions">
             <p class="constructor__questions-notation">Poll Questions</p>
             <ul class="constructor__question-list">
-                <DomainCreateQuestionItem :order="1" text="What is your favorite color?" type="TEXT" />
-                <DomainCreateQuestionItem :order="2" text="What the fuck are you?" type="IMAGE_CHOICE" />
+                <DomainCreateQuestionItem v-for="question in poll.questions" :order="question.order" :text="question.text" :type="question.type" />
             </ul>
             <UiMyButton class="constructor__questions-add-btn" icon="plus" :icon-with-round="true" @click="open">Add a question</UiMyButton>
         </div>
@@ -29,7 +29,7 @@ const {isOpen, open, close} = useModal();
             <UiMyButton btn-type="bordered" icon="add-file">Create Poll</UiMyButton>
             <UiMyButton btn-type="bordered" icon="draft">Save draft</UiMyButton>
         </div>
-    <ModalsCreateQuestionModal v-if="isOpen" :is-show-modal="isOpen" @close="close" @create="(question) => console.log(question)" />
+    <ModalsCreateQuestionModal v-if="isOpen" :is-show-modal="isOpen" @close="close" @create="(question) => addQuestion(question)" />
     </div>
 </template>
 

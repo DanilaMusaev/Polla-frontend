@@ -4,7 +4,7 @@ interface Props {
 }
 interface Emits {
     (e: 'close'): void;
-    (e: 'create', question: Partial<Question>): void;
+    (e: 'create', question: Omit<Question, 'order'>): void;
 }
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
@@ -50,7 +50,11 @@ const prevStep = () => {
 };
 
 const createQuestion = () => {
-    emit('create', { ...questionInfo });
+    try {
+        emit('create', prepareQuestionForCreation(questionInfo));
+    } catch (err) {
+        alert(`How?!!, error: ${err}`); // Need add notification component to show error/other notifications
+    }
     modalClose();
 };
 
