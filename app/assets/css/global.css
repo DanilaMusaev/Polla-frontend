@@ -12,6 +12,11 @@
 	--blue-light: #84C9FF;
 	--blue-dark: #0f1522;
 	--yellow-light: #FFE33D;
+
+	--scrollbar-thumb: var(--text-primary);
+	--scrollbar-track: var(--surface);
+
+	--input-focus-shadow: 0px 0px 6px rgba(255, 255, 255, 0.15);
 }
 
 html[data-theme="light"] {
@@ -24,6 +29,8 @@ html[data-theme="light"] {
 	--text-secondary: #475569;
 	--text-primary: #0f172a;
 	--border: #e2e8f0;
+
+	--input-focus-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
 }
 
 :root {

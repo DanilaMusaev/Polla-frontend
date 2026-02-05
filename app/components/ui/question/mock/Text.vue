@@ -8,13 +8,13 @@ const props = defineProps<Props>();
 
 <template>
     <div class="question-text">
-        <textarea class="question-text__textarea" name="Mock name" placeholder="Placeholder"></textarea>
+        <UiMyTextarea class="question-text__textarea" placeholder="Write here your answer" :max-height="150" />
     </div>
 </template>
 
 <style scoped>
 .question-text__textarea {
-    padding: 4px 6px;
+    padding: 8px 8px;
     height: 28px;
     width: 100%;
 

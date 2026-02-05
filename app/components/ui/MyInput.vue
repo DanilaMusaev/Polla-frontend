@@ -5,6 +5,8 @@ interface Props {
     placeholder?: string;
     disabled?: boolean;
     customClass?: string;
+    name?: string;
+    id?: string;
 }
 
 interface Emits {
@@ -36,8 +38,10 @@ const onBlur = (): void => {
         @blur="onBlur"
         :type="type"
         class="input"
-        :class="props.customClass"
+        :class="customClass"
         :placeholder="placeholder"
+        :name="name"
+        :id="id"
     />
 </template>
 
@@ -51,9 +55,15 @@ const onBlur = (): void => {
 
     border-radius: 10px;
     background: var(--surface);
+
+    transition: box-shadow 0.15s ease-in-out;
 }
 
 .input::placeholder {
     color: var(--text-secondary);
+}
+
+.input:focus {
+    box-shadow: var(--input-focus-shadow);
 }
 </style>

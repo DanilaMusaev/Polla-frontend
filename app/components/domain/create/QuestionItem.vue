@@ -5,6 +5,7 @@ interface Props {
     type: QuestionTypes;
 }
 
+const {removeQuestion} = usePollState();
 const props = defineProps<Props>();
 
 const questionType = computed(() => {
@@ -31,7 +32,8 @@ const questionType = computed(() => {
             class="question-item__delete-btn"
             type="button"
             aria-label="Delete question: What is your favorite color?"
-            title="Delete this question"
+            title="Delete question"
+            @click="removeQuestion(props.order)"
         >
             <IconsSvgIcon name="trash" class="question-item__icon-delete" />
         </button>
@@ -62,6 +64,10 @@ const questionType = computed(() => {
 }
 
 .question-item__text {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
     font-weight: 600;
     font-size: 14px;
     color: var(--text-primary);

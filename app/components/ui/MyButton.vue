@@ -37,6 +37,7 @@ const handleClick = () => {
         <span v-if="icon && iconPosition === 'start'" class="button-icon__wrapper" :class="{ rounded: iconWithRound }">
             <IconsSvgIcon
                 :name="icon"
+                :style="{color: props.iconColor}"
                 class="button-icon"
             />
         </span>
@@ -86,11 +87,13 @@ const handleClick = () => {
 }
 
 .button.solid .button-icon {
-    stroke: var(--secondary);
+    color: var(--secondary);
+    stroke: currentColor;
 }
 
 .button.bordered .button-icon {
-    fill: var(--primary);
+    color: var(--primary);
+    fill: currentColor;
     stroke: none;
 }
 
@@ -115,20 +118,20 @@ const handleClick = () => {
     height: 15px;
 }
 
-.button.solid:hover {
+.button.solid:not(:disabled):hover {
     opacity: 0.8;
 }
 
-.button.bordered:hover {
+.button.bordered:not(:disabled):hover {
     color: var(--background);
     background-color: var(--primary);
 }
 
-.button.bordered:hover .button-icon {
+.button.bordered:not(:disabled):hover .button-icon {
     fill: var(--background);
 }
 
-.button:active {
+.button:not(:disabled):active {
     transform: scale(0.98);
 }
 </style>

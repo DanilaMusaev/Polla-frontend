@@ -22,7 +22,7 @@ const { poll } = usePollState();
 
 <style scoped>
 .preview {
-    flex-grow: 3;
+    flex: 4 0 0;
     padding: 10px 20px;
 
     border-radius: 10px;
@@ -51,6 +51,8 @@ const { poll } = usePollState();
     font-weight: 400;
     font-size: 16px;
     color: var(--text-secondary);
+    line-break: anywhere;
+    -ms-line-break: anywhere;
 }
 
 .preview__questions-list {

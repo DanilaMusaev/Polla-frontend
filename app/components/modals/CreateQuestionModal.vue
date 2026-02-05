@@ -147,7 +147,13 @@ watch(
                         <DomainCommonQuestionAnswersOptions
                             :type="questionInfo.type"
                             :model-value="questionInfo.options"
-                            @update:model-value="(value) => handleChangeQuestionProperty(value, 'options')"
+                            @update:model-value="
+                                (value) =>
+                                    handleChangeQuestionProperty(
+                                        value,
+                                        'options'
+                                    )
+                            "
                         />
                     </div>
                 </div>
@@ -166,6 +172,7 @@ watch(
                 />
             </button>
             <button
+                v-if="currentStep < 3"
                 @click="nextStep"
                 :disabled="isNextDisabled"
                 class="modal-create-question__control-btn"
@@ -176,6 +183,16 @@ watch(
                     class="modal-create-question__control-icon icon-forward"
                 />
             </button>
+            <UiMyButton
+                v-else-if="currentStep === 3"
+                @click="nextStep"
+                class="modal-create-question__control-btn"
+                :disabled="isNextDisabled"
+                btn-type="solid"
+                icon="check-mark"
+                icon-color="var(--background)"
+                >Create</UiMyButton
+            >
         </div>
     </ModalsModalOverlay>
 </template>

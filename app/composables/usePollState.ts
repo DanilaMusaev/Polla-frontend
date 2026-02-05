@@ -4,12 +4,47 @@ import type { Poll, Question } from '~/shared/types/Poll.type';
  * Composable для работы с объектом опроса при его создании
  */
 export const usePollState = () => {
+    const POLL_DRAFT_KEY = 'pollDraft';
     // Общее состояние для создаваемого опроса, благодаря useState, в рамках одного запроса это будет общий объект
-    const poll = useState<Poll>('poll', () => ({
-        title: 'New Poll',
-        description: '',
-        questions: [],
-    }));
+    const poll = useState<Poll>(`poll-state`, () => getDefaultPoll());
+
+    /**
+     * Функция для подгрузки состояния из localStorage
+     */
+    const loadFromStorage = () => {
+        if (!import.meta.client) return;
+
+        try {
+            const state = localStorage.getItem(POLL_DRAFT_KEY);
+            if (state) {
+                const parsed = JSON.parse(state);
+                if (parsed && typeof parsed === 'object') {
+                    // Обновление состояния
+                    poll.value = {
+                        title: parsed.title || 'New Poll',
+                        description: parsed.description || '',
+                        questions: Array.isArray(parsed.questions)
+                            ? parsed.questions
+                            : [],
+                    };
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load from localStorage:', error);
+            localStorage.removeItem(POLL_DRAFT_KEY);
+        }
+    };
+
+    /**
+     * Вспомогательная функция для дефолтного состояния
+     */
+    function getDefaultPoll(): Poll {
+        return {
+            title: 'New Poll',
+            description: '',
+            questions: [],
+        };
+    }
 
     /**
      * Функция ля обновления состояния опроса
@@ -73,6 +108,11 @@ export const usePollState = () => {
         movingQuestion.order = newOrder;
     };
 
+    /**
+     * Функция удаления вопроса из состояния опроса
+     *
+     * @param order - порядковый номер удаляемого вопроса
+     */
     const removeQuestion = (order: number) => {
         const index = poll.value.questions.findIndex((q) => q.order === order);
         if (index !== -1) {
@@ -80,6 +120,28 @@ export const usePollState = () => {
 
             reorderQuestions();
         }
+    };
+
+    /**
+     * Функция сохранения текущего состояния в localStorage
+     */
+    const saveDraft = () => {
+        if (!import.meta.client || typeof localStorage === 'undefined') return;
+
+        localStorage.setItem(POLL_DRAFT_KEY, JSON.stringify(poll.value));
+        alert('Черновик сохранен!'); // Пока что ALERT, потом надо будет переделать по notificator
+    };
+
+    /**
+     * Функция отправки созданного опроса на сервер
+     */
+    const sendPollOnServer = () => {
+        if (!import.meta.client || typeof localStorage === 'undefined') return;
+
+        resetPoll();
+        alert(
+            'Функция отправки созданного опроса на сервер находится в разработке!'
+        ); // Уведомление (Пока что через ALERT)
     };
 
     const reorderQuestions = () => {
@@ -91,11 +153,15 @@ export const usePollState = () => {
     };
 
     const resetPoll = () => {
-        poll.value = {
-            title: 'Новый опрос',
-            description: '',
-            questions: [],
-        };
+        poll.value = getDefaultPoll();
+
+        if (import.meta.client) {
+            try {
+                localStorage.removeItem(POLL_DRAFT_KEY);
+            } catch (error) {
+                console.error('Failed to clear draft on reset:', error); // ALERT нужен нотификатор
+            }
+        }
     };
 
     const getLastOrder = (): number => {
@@ -105,6 +171,10 @@ export const usePollState = () => {
         return maxOrder + 1;
     };
 
+    // Автоподгрузка после гидрации при монтировании
+    if (import.meta.client) {
+        setTimeout(loadFromStorage, 0);
+    }
 
     return {
         poll,
@@ -114,5 +184,7 @@ export const usePollState = () => {
         moveQuestion,
         removeQuestion,
         resetPoll,
+        saveDraft,
+        sendPollOnServer,
     };
 };
