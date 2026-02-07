@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useGoToModal } from '~/composables/useGoToModal';
 import { ROUTES } from '~/config/routes';
-
+useHead({
+    title: 'Poll - Main'
+})
 const { isOpen, action: gotoAction, openModal, closeModal } = useGoToModal();
 
 const HOME_SELECTORS: HomeSelectorsProps[] = [

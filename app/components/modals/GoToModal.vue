@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ROUTES } from '~/config/routes';
+
 interface ModalProps {
     isShowModal?: boolean;
     action: 'complete' | 'check';
@@ -14,23 +16,34 @@ const emit = defineEmits<ModalEmits>();
 const pollId = ref<string>('');
 
 const modalTitle = computed(() => {
-    return props.action === 'complete' ? "Poll Link" : "Check Link"
+    return props.action === 'complete' ? "Poll Link" : "Check Link";
 })
 const modalText = computed(() => {
-    return props.action === 'complete' ? "Enter the ID of the poll you want to complete" : "Enter the ID of the poll you want to view the results of"
+    return props.action === 'complete' ? "Enter the ID of the poll you want to complete" : "Enter the ID of the poll you want to view the results of";
 })
 
 const isIdWritten = computed(() => !pollId.value.trim());
 
 const buttonHandler = () => {
+    submitEmitHandler();
+}
+
+const onEnterDown = (event: KeyboardEvent) => {
+    if (event.key !== 'Enter' || !isIdWritten) {
+        return;
+    }
+    submitEmitHandler();
+}
+
+const submitEmitHandler = () => {
     emit('submit', props.action, pollId.value);
 
     switch (props.action) {
         case 'check':
-            alert(`Check id: ${pollId.value}`);
+            alert(`Check id: ${pollId.value}. This feature is under development.`);
             break;
         case 'complete':
-            alert(`Complete id: ${pollId.value}`);
+            navigateTo(ROUTES.completePoll(pollId.value));
             break;
     }
 
@@ -47,7 +60,7 @@ const modalClose = () => {
         <div class="modal-goto__wrapper">
             <p class="modal-goto__text">{{ modalText }}</p>
             <div class="modal__input-wrapper">
-                <UiMyInput v-model="pollId" custom-class="modal__input" type="text" placeholder="Write here the ID..." />
+                <UiMyInput v-model="pollId" @keydown="onEnterDown" custom-class="modal__input" type="text" placeholder="Write here the ID..." />
                 <button @click="buttonHandler" class="modal__btn-go" :disabled="isIdWritten">Go</button>
             </div>
         </div>

@@ -143,6 +143,18 @@ body {
     color: var(--primary);
 }
 
+.text-link {
+	color: var(--secondary);
+}
+
+.text-link:hover {
+	text-decoration: underline;
+}
+
+.text-link:visited {
+	color: var(--primary);
+}
+
 /* Общие анимации */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }

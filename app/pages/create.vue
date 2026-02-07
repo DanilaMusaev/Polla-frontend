@@ -1,4 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useHead({
+    title: 'Polla - Create poll',
+    meta: [
+        {
+            name: 'description',
+            content: 'A page for creating and instantly viewing a preview of the poll(survey)'
+        }
+    ]
+})
+</script>
 
 <template>
     <div class="create-poll main-content">

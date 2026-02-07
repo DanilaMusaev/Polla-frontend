@@ -9,7 +9,7 @@ export default defineNuxtConfig({
             ],
         },
     },
-    devtools: { enabled: true },
+    devtools: { enabled: false },
     imports: {
         dirs: ['~/shared/types/**'],
     },

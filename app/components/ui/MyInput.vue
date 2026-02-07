@@ -12,6 +12,7 @@ interface Props {
 interface Emits {
     (e: 'update:modelValue', value: string | number): void;
     (e: 'blur'): void;
+    (e: 'keydown', payload: KeyboardEvent): void;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,6 +30,10 @@ const onInput = (event: Event): void => {
 const onBlur = (): void => {
     emit('blur');
 };
+
+const onKeydown = (event: KeyboardEvent): void => {
+    emit('keydown', event);
+}
 </script>
 
 <template>
@@ -36,6 +41,7 @@ const onBlur = (): void => {
         :value="modelValue"
         @input="onInput"
         @blur="onBlur"
+        @keydown="onKeydown"
         :type="type"
         class="input"
         :class="customClass"
