@@ -14,11 +14,32 @@ const pollId = computed(() => {
     return Array.isArray(id) ? id[0] || 'id undefined' : id;
 });
 
-const questionAnswers = reactive<{ [key: string]: any }>({});
+const respName = ref<string>();
+const questionAnswers = reactive<UnpreparedAnswers>({});
 
 const questionAnswersHandlers = (value: any, questionId: string) => {
     questionAnswers[questionId] = value;
 };
+
+const checkAnswersForQuestions = (answers: UnpreparedAnswers): boolean => {
+    if (Object.keys(answers).length <= 0 || Object.keys(answers).length !== mockPoll.questions.length) {
+        alert('You must answer all the questions in the survey.'); // Пока так ALERT
+        return false;
+    }
+    
+    return true;
+}
+
+const handleSubmitResponse = (pollId: string, answers: UnpreparedAnswers, respondent?: string) => {
+    if (!checkAnswersForQuestions(answers)) {
+        return;
+    }
+    const pollResponse = preparePollAnswersToSending(pollId, answers, respondent);
+    if (!pollResponse) {
+        return;
+    }
+    console.log(pollResponse);
+}
 
 // Mock poll just for test
 const mockPoll: {
@@ -68,6 +89,10 @@ const mockPoll: {
                         <h2 class="title-1 complete-poll__title">
                             Completing the poll: "{{ mockPoll.title }}"
                         </h2>
+                        <div class="complete-poll__respondent-wrapper">
+                            <p class="complete-poll__respondent-tip">Enter your name/alias:</p>
+                            <UiMyInput v-model="respName" class="complete-poll__respondent-input" placeholder='Leave field blank to stay "anonymous"'/>
+                        </div>
                         <div class="complete-poll__name-desc-wrapper">
                             <p class="complete-poll__name">{{ mockPoll.title }}</p>
                             <p v-if="mockPoll.description" class="complete-poll__desc">{{ mockPoll.description }}</p>
@@ -82,6 +107,9 @@ const mockPoll: {
                         </div>
                     </div>
                     <DomainCompletePollNotFound v-else :poll-id="pollId" />
+                    <div class="complete-poll__controls-wrapper">
+                        <UiMyButton @click="handleSubmitResponse(mockPoll.id, questionAnswers, respName)" class="complete-poll__send-btn">Send Answers</UiMyButton>
+                    </div>
                 </div>
             </div>
         </LayoutContainer>
@@ -102,6 +130,27 @@ const mockPoll: {
 
 .complete-poll__title {
     margin-bottom: 20px;
+}
+
+.complete-poll__respondent-wrapper {
+    margin-bottom: 15px;
+    padding: 10px;
+
+    border-radius: 8px;
+    background-color: var(--surface);
+}
+
+.complete-poll__respondent-tip {
+    margin-bottom: 8px;
+
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-primary);
+}
+
+.complete-poll__respondent-input {
+    width: 100%;
+    background-color: var(--background);
 }
 
 .complete-poll__name-desc-wrapper {
@@ -132,5 +181,12 @@ const mockPoll: {
 
     display: grid;
     gap: 15px;
+}
+
+.complete-poll__controls-wrapper {
+    margin-top: 15px;
+
+    display: flex;
+    justify-content: center;
 }
 </style>
