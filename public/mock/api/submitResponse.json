@@ -1,0 +1,26 @@
+{
+    "id": "86a2720e-7222-41c5-8e18-8934a8ab716e",
+    "respondent": "SSSSS",
+    "submittedAt": "2026-02-15T15:04:55.081Z",
+    "pollId": "e157303c-0bc2-46d8-ba4a-1c48af09783c",
+    "answers": [
+        {
+            "id": "05e01d8c-ce74-4049-b5fa-6292d2e3f501",
+            "questionId": "3fc7cc73-6a6d-4550-b408-618c262a0cac",
+            "responseId": "86a2720e-7222-41c5-8e18-8934a8ab716e",
+            "content": "Umom"
+        },
+        {
+            "id": "8b105c22-b703-4335-86e5-4e359687e8c0",
+            "questionId": "2ff2a260-3882-46e7-9241-f3f4fc28e7e5",
+            "responseId": "86a2720e-7222-41c5-8e18-8934a8ab716e",
+            "content": "Итальянская"
+        },
+        {
+            "id": "b4afe60f-1cae-4e59-91fb-066f4c72922d",
+            "questionId": "1d496059-9c5e-4161-bfbd-59e2b56ae25c",
+            "responseId": "86a2720e-7222-41c5-8e18-8934a8ab716e",
+            "content": "/uploads/sushi-456.jpg"
+        }
+    ]
+}

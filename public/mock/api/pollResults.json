@@ -1,0 +1,36 @@
+{
+    "id": "e157303c-0bc2-46d8-ba4a-1c48af09783c",
+    "title": "Опрос о еде",
+    "description": "Помогите выбрать меню",
+    "createdAt": "2025-11-09T13:07:38.114Z",
+    "userId": null,
+    "resultsId": "9d822bed-7120-4450-97d9-2fd02071ed5c",
+    "responses": [
+        {
+            "id": "a9da3b6b-f79b-4feb-9578-f180ab40b584",
+            "respondent": "Loxovskoy",
+            "submittedAt": "2025-11-13T16:09:39.200Z",
+            "pollId": "e157303c-0bc2-46d8-ba4a-1c48af09783c",
+            "answers": [
+                {
+                    "id": "3e72014a-0b90-494a-929b-bf1585aafa27",
+                    "questionId": "3fc7cc73-6a6d-4550-b408-618c262a0cac",
+                    "responseId": "a9da3b6b-f79b-4feb-9578-f180ab40b584",
+                    "content": "Lox"
+                },
+                {
+                    "id": "7e2141cf-af07-48ec-9bd3-feb5b6da427b",
+                    "questionId": "2ff2a260-3882-46e7-9241-f3f4fc28e7e5",
+                    "responseId": "a9da3b6b-f79b-4feb-9578-f180ab40b584",
+                    "content": "Японская"
+                },
+                {
+                    "id": "04110c9c-5638-4b3d-b053-20689b274ee7",
+                    "questionId": "1d496059-9c5e-4161-bfbd-59e2b56ae25c",
+                    "responseId": "a9da3b6b-f79b-4feb-9578-f180ab40b584",
+                    "content": "/uploads/sushi-456.jpg"
+                }
+            ]
+        }
+    ]
+}

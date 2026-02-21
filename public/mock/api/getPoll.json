@@ -1,0 +1,31 @@
+{
+    "id": "e157303c-0bc2-46d8-ba4a-1c48af09783c",
+    "title": "Опрос о еде",
+    "description": "Помогите выбрать меню",
+    "questions": [
+        {
+            "id": "3fc7cc73-6a6d-4550-b408-618c262a0cac",
+            "text": "Как вас зовут?",
+            "type": "TEXT",
+            "order": 1,
+            "options": null,
+            "pollId": "e157303c-0bc2-46d8-ba4a-1c48af09783c"
+        },
+        {
+            "id": "2ff2a260-3882-46e7-9241-f3f4fc28e7e5",
+            "text": "Какая кухня вам нравится?",
+            "type": "SINGLE_CHOICE",
+            "order": 2,
+            "options": ["Итальянская", "Японская", "Мексиканская"],
+            "pollId": "e157303c-0bc2-46d8-ba4a-1c48af09783c"
+        },
+        {
+            "id": "1d496059-9c5e-4161-bfbd-59e2b56ae25c",
+            "text": "Выберите красивое блюдо:",
+            "type": "IMAGE_CHOICE",
+            "order": 3,
+            "options": ["/uploads/pasta-123.jpg", "/uploads/sushi-456.jpg"],
+            "pollId": "e157303c-0bc2-46d8-ba4a-1c48af09783c"
+        }
+    ]
+}

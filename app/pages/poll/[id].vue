@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import type { QuestionFromApi } from '~/api/types/poll.api-type';
+import { usePollService } from '~/composables/usePollService';
 
 const route = useRoute();
+const pollService = usePollService();
+
 useHead({
     title: 'Poll - Complete poll',
 });
@@ -14,70 +16,80 @@ const pollId = computed(() => {
     return Array.isArray(id) ? id[0] || 'id undefined' : id;
 });
 
+const { data, pending, error, refresh } = useAsyncData(
+    `poll-${pollId.value}`,
+    async () => {
+        const poll = await pollService.getPoll(pollId.value);
+
+        // Искусственная задержка, дабы было видно загрузку
+        const _ = await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(0);
+            }, 1000);
+        });
+
+        return {
+            poll,
+        };
+    },
+    { watch: [pollId] }
+);
+
 const respName = ref<string>();
 const questionAnswers = reactive<UnpreparedAnswers>({});
 
-const questionAnswersHandlers = (value: any, questionId: string) => {
+const handleRespNameChange = (value: string) => {
+    respName.value = value;
+}
+
+const handleAnswerChange = (value: any, questionId: string) => {
     questionAnswers[questionId] = value;
 };
 
 const checkAnswersForQuestions = (answers: UnpreparedAnswers): boolean => {
-    if (Object.keys(answers).length <= 0 || Object.keys(answers).length !== mockPoll.questions.length) {
+    if (!data || !data.value || !hasPollData(data.value)) {
+        alert('Poll data is no available'); // ALERT
+        return false;
+    }
+
+    if (
+        Object.keys(answers).length <= 0 ||
+        Object.keys(answers).length !== data.value.poll.questions.length
+    ) {
         alert('You must answer all the questions in the survey.'); // Пока так ALERT
         return false;
     }
-    
-    return true;
-}
 
-const handleSubmitResponse = (pollId: string, answers: UnpreparedAnswers, respondent?: string) => {
+    return true;
+};
+
+const handleSubmitResponse = (
+    pollId: string,
+    answers: UnpreparedAnswers,
+    respondent?: string
+) => {
     if (!checkAnswersForQuestions(answers)) {
         return;
     }
-    const pollResponse = preparePollAnswersToSending(pollId, answers, respondent);
+    const pollResponse = preparePollAnswersToSending(
+        pollId,
+        answers,
+        respondent
+    );
+
     if (!pollResponse) {
         return;
     }
     console.log(pollResponse);
-}
-
-// Mock poll just for test
-const mockPoll: {
-    id: string;
-    title: string;
-    description: string;
-    questions: QuestionFromApi[];
-} = {
-    id: 'e157303c-0bc2-46d8-ba4a-1c48af09783c',
-    title: 'Опрос о еде',
-    description: 'Помогите выбрать меню',
-    questions: [
-        {
-            id: '3fc7cc73-6a6d-4550-b408-618c262a0cac',
-            text: 'Как вас зовут?',
-            type: 'TEXT',
-            order: 1,
-            options: null,
-            pollId: 'e157303c-0bc2-46d8-ba4a-1c48af09783c',
-        },
-        {
-            id: '2ff2a260-3882-46e7-9241-f3f4fc28e7e5',
-            text: 'Какая кухня вам нравится?',
-            type: 'SINGLE_CHOICE',
-            order: 2,
-            options: ['Итальянская', 'Японская', 'Мексиканская'],
-            pollId: 'e157303c-0bc2-46d8-ba4a-1c48af09783c',
-        },
-        {
-            id: '2ff2a260-agges-46e7-dc-xcdgsg3gwet',
-            text: 'Какая шеф вам понравился?',
-            type: 'MULTIPLE_CHOICE',
-            order: 3,
-            options: ['Умомный', 'Парашный', 'Баринский', 'Ксентаворский'],
-            pollId: 'e157303c-0bc2-46d8-ba4a-1c48af09783c',
-        },
-    ],
 };
+
+const handleSubmit = () => {
+    if (!data.value?.poll) {
+        return;
+    }
+
+    handleSubmitResponse(data.value.poll.id, questionAnswers, respName.value);
+}
 </script>
 
 <template>
@@ -85,31 +97,25 @@ const mockPoll: {
         <LayoutContainer>
             <div class="complete-poll__inner">
                 <div class="complete-poll__content">
-                    <div v-if="route.params.id === mockPoll.id">
-                        <h2 class="title-1 complete-poll__title">
-                            Completing the poll: "{{ mockPoll.title }}"
-                        </h2>
-                        <div class="complete-poll__respondent-wrapper">
-                            <p class="complete-poll__respondent-tip">Enter your name/alias:</p>
-                            <UiMyInput v-model="respName" class="complete-poll__respondent-input" placeholder='Leave field blank to stay "anonymous"'/>
-                        </div>
-                        <div class="complete-poll__name-desc-wrapper">
-                            <p class="complete-poll__name">{{ mockPoll.title }}</p>
-                            <p v-if="mockPoll.description" class="complete-poll__desc">{{ mockPoll.description }}</p>
-                        </div>
-                        <div class="complete-poll__questions-wrapper">
-                            <DomainCommonQuestion
-                                v-for="question in mockPoll.questions"
-                                :question="question"
-                                v-model="questionAnswers[question.id]"
-                                @change="questionAnswersHandlers"
-                            />
-                        </div>
+                    <div v-if="pending" class="complete-poll__loader">
+                        Loading...
                     </div>
+
+                    <div v-else-if="error" class="complete-poll__error">
+                        Error loading poll: {{ error.message }}
+                    </div>
+
+                    <DomainCompletePollForm
+                        v-else-if="data?.poll"
+                        :poll="data.poll"
+                        :resp-name="respName"
+                        :question-answers="questionAnswers"
+                        @update:resp-name="handleRespNameChange"
+                        @answer-change="handleAnswerChange"
+                        @submit="handleSubmit"
+                    />
+
                     <DomainCompletePollNotFound v-else :poll-id="pollId" />
-                    <div class="complete-poll__controls-wrapper">
-                        <UiMyButton @click="handleSubmitResponse(mockPoll.id, questionAnswers, respName)" class="complete-poll__send-btn">Send Answers</UiMyButton>
-                    </div>
                 </div>
             </div>
         </LayoutContainer>
@@ -126,67 +132,5 @@ const mockPoll: {
 .complete-poll__content {
     width: 100%;
     max-width: 650px;
-}
-
-.complete-poll__title {
-    margin-bottom: 20px;
-}
-
-.complete-poll__respondent-wrapper {
-    margin-bottom: 15px;
-    padding: 10px;
-
-    border-radius: 8px;
-    background-color: var(--surface);
-}
-
-.complete-poll__respondent-tip {
-    margin-bottom: 8px;
-
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text-primary);
-}
-
-.complete-poll__respondent-input {
-    width: 100%;
-    background-color: var(--background);
-}
-
-.complete-poll__name-desc-wrapper {
-    margin-bottom: 15px;
-    padding: 10px;
-
-    border-radius: 8px;
-    background-color: var(--surface);
-}
-
-.complete-poll__name {
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text-primary);
-}
-
-.complete-poll__desc {
-    font-weight: 400;
-    font-size: 16px;
-    color: var(--text-secondary);
-    line-break: anywhere;
-    -ms-line-break: anywhere;
-}
-
-
-.complete-poll__questions-wrapper {
-    max-width: 850px;
-
-    display: grid;
-    gap: 15px;
-}
-
-.complete-poll__controls-wrapper {
-    margin-top: 15px;
-
-    display: flex;
-    justify-content: center;
 }
 </style>
